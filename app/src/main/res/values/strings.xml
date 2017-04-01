@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Twixter</string>
+    <string name="write_tweet">Write a tweet</string>
+    <string name="send_tweet">Send</string>
+    <string name="tweet_sent">Your tweet was sent!</string>
+</resources>
