@@ -1,4 +1,4 @@
-package com.twixter.twixter;
+package com.example.ian.twixter;
 
 import org.junit.Test;
 

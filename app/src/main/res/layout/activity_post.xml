@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ian.twixter.PostActivity">
+
+    <EditText
+        android:id="@+id/editPost"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+        android:gravity="center"
+        android:hint="Type your post here!" />
+
+    <Button
+        android:id="@+id/sendPost"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:layout_alignLeft="@+id/editPost"
+        android:layout_alignStart="@+id/editPost"
+        android:layout_below="@+id/editPost"
+        android:layout_marginLeft="25dp"
+        android:text="Send Post" />
+
+    <Button
+        android:id="@+id/cancelPost"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:layout_alignEnd="@+id/editPost"
+        android:layout_alignRight="@+id/editPost"
+        android:layout_below="@+id/editPost"
+        android:layout_marginRight="25dp"
+        android:text="Cancel" />
+
+</RelativeLayout>

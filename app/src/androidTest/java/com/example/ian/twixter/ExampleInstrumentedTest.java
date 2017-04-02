@@ -1,4 +1,4 @@
-package com.twixter.twixter;
+package com.example.ian.twixter;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.twixter.twixter", appContext.getPackageName());
+        assertEquals("com.example.ian.twixter", appContext.getPackageName());
     }
 }
