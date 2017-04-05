@@ -15,8 +15,7 @@
         android:layout_marginTop="50dp"
         android:background="@android:drawable/editbox_dropdown_light_frame"
         android:gravity="center"
-        android:hint="Type your post here!"
-        android:text="@string/type_post" />
+        android:hint="@string/type_post" />
 
     <Button
         android:id="@+id/sendPost"
