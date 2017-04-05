@@ -28,7 +28,7 @@
         android:layout_below="@id/msgToday"
         android:layout_margin="20dp"
         android:padding="20dp"
-        android:text="Feed"
+        android:text="@string/feed_button"
         android:textSize="20sp" />
 
     <Button
@@ -39,7 +39,7 @@
         android:layout_below="@id/msgToday"
         android:layout_margin="20dp"
         android:padding="20dp"
-        android:text="Post"
+        android:text="@string/post_button"
         android:textSize="20sp" />
 
     <Button
@@ -49,7 +49,7 @@
         android:layout_below="@id/feedButton"
         android:layout_margin="20dp"
         android:padding="20dp"
-        android:text="Search"
+        android:text="@string/search_button"
         android:textSize="20sp" />
 
     <Button
@@ -60,7 +60,7 @@
         android:layout_below="@id/postButton"
         android:layout_margin="20dp"
         android:padding="20dp"
-        android:text="Direct Message"
+        android:text="@string/dm_button"
         android:textSize="20sp" />
 
     <Button
@@ -70,7 +70,7 @@
         android:layout_below="@id/searchButton"
         android:layout_margin="20dp"
         android:padding="20dp"
-        android:text="Help"
+        android:text="@string/help_button"
         android:textSize="20sp" />
 
 </RelativeLayout>

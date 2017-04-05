@@ -15,7 +15,8 @@
         android:layout_marginTop="50dp"
         android:background="@android:drawable/editbox_dropdown_light_frame"
         android:gravity="center"
-        android:hint="Type your post here!" />
+        android:hint="Type your post here!"
+        android:text="@string/type_post" />
 
     <Button
         android:id="@+id/sendPost"
@@ -25,7 +26,7 @@
         android:layout_alignStart="@+id/editPost"
         android:layout_below="@+id/editPost"
         android:layout_marginLeft="25dp"
-        android:text="Send Post" />
+        android:text="@string/send_post" />
 
     <Button
         android:id="@+id/cancelPost"
@@ -35,6 +36,6 @@
         android:layout_alignRight="@+id/editPost"
         android:layout_below="@+id/editPost"
         android:layout_marginRight="25dp"
-        android:text="Cancel" />
+        android:text="@string/cancel_post" />
 
 </RelativeLayout>

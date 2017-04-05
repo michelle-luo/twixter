@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Twixter</string>
+    <string name="send_post">Send Post</string>
+    <string name="cancel_post">Cancel</string>
+    <string name="type_post">Type your post here</string>
+    <string name="feed_button">Feed</string>
+    <string name="post_button">Post</string>
+    <string name="search_button">Search</string>
+    <string name="dm_button">Direct Message</string>
+    <string name="help_button">Help</string>
 </resources>
