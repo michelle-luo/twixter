@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,18 +24,16 @@ public class PostActivity extends AppCompatActivity {
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                EditText textBox = (EditText) findViewById(R.id.editPost);
-                String sms = textBox.getText().toString();
+                EditText editPost = (EditText) findViewById(R.id.editPost);
+                String number = "40404";
+                String message = editPost.getText().toString();
 
-                try {
-                    SmsManager smsMgr = SmsManager.getDefault();
-                    smsMgr.sendTextMessage("40404", null, sms, null, null);
-                    Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_LONG).show();
+                if (message.length() > 0) {
+                    sendMsg(message, number);
                 }
-                catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "SMS failed, please try again later!",
+                else {
+                    Toast.makeText(getBaseContext(), "Please enter a Tweet.",
                             Toast.LENGTH_LONG).show();
-                    e.printStackTrace(System.out);
                 }
                 Intent intent = new Intent(PostActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -47,5 +46,19 @@ public class PostActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void sendMsg(String message, String number) {
+        SmsManager smsMgr;
+        try {
+            smsMgr = SmsManager.getDefault();
+            smsMgr.sendTextMessage(number, null, message, null, null);
+            Toast.makeText(getApplicationContext(), "Tweet sent!", Toast.LENGTH_LONG).show();
+        }
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Tweet failed to send, please try again!",
+                    Toast.LENGTH_LONG).show();
+            Log.e("Twixter", "send message", e);
+        }
     }
 }
