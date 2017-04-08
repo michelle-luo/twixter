@@ -1,8 +1,9 @@
 package com.example.ian.twixter;
 
+import android.app.Activity;
 import android.telephony.SmsManager;
 
-public class sendText {
+public class sendText extends Activity {
     protected SmsManager smsMgr;
     protected String number = "2015606871";
 
