@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ian.twixter">
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:maxSdkVersion="18" />
     <uses-permission
         android:name="android.permission.SEND_SMS" />
     <application
@@ -14,7 +17,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,6 +25,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".SearchUsernameActivity" />
         <activity android:name=".HelpActivity" />
+        <activity android:name=".sendText" />
     </application>
 
 </manifest>

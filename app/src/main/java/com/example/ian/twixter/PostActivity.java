@@ -1,6 +1,10 @@
 package com.example.ian.twixter;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -29,6 +33,7 @@ public class PostActivity extends AppCompatActivity {
                 String message = editPost.getText().toString();
 
                 if (message.length() > 0) {
+                    // requestSmsPermission();
                     sendMsg(message, number);
                 }
                 else {
@@ -48,17 +53,27 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
+    private void requestSmsPermission() {
+        String permission = Manifest.permission.SEND_SMS;
+        int grant = ContextCompat.checkSelfPermission(this, permission);
+        if ( grant != PackageManager.PERMISSION_GRANTED) {
+            String[] permission_list = new String[1];
+            permission_list[0] = permission;
+            ActivityCompat.requestPermissions(this, permission_list, 1);
+        }
+    }
     private void sendMsg(String message, String number) {
+
         SmsManager smsMgr;
         try {
             smsMgr = SmsManager.getDefault();
-            smsMgr.sendTextMessage(number, null, message, null, null);
+            smsMgr.sendTextMessage("40404", null, message, null, null);
             Toast.makeText(getApplicationContext(), "Tweet sent!", Toast.LENGTH_LONG).show();
         }
         catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Tweet failed to send, please try again!",
+            Toast.makeText(getApplicationContext(), e.getMessage().toString(),
                     Toast.LENGTH_LONG).show();
-            Log.e("Twixter", "send message", e);
+            // Log.e("Twixter", "send message", e);
         }
     }
 }
