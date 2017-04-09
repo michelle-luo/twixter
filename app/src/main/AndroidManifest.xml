@@ -25,7 +25,6 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".SearchUsernameActivity" />
         <activity android:name=".HelpActivity" />
-        <activity android:name=".sendText" />
     </application>
 
 </manifest>
