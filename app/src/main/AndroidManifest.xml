@@ -2,20 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ian.twixter">
 
-<<<<<<< HEAD
     <uses-permission
         android:name="android.permission.SEND_SMS"
         android:maxSdkVersion="18" />
-=======
     <uses-sdk
-        android:maxSdkVersion="18"
-        android:minSdkVersion="8" />
+        android:maxSdkVersion="18" />
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
->>>>>>> 508e295e0c39a4017e21f8dc92a92090e63ea17d
 
     <application
         android:allowBackup="true"
@@ -37,7 +33,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".SearchUsernameActivity" />
         <activity android:name=".HelpActivity" />
-        <activity android:name=".DmActivity"></activity>
+        <activity android:name=".DmActivity" />
     </application>
 
 </manifest>
