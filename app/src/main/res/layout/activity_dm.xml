@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ian.twixter.DmActivity">
+
+    <EditText
+        android:id="@+id/dmUsername"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+        android:gravity="top|left"
+        android:hint="Type username here!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+    <EditText
+        android:id="@+id/dmMessage"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@id/dmUsername"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+        android:gravity="top|left"
+        android:hint="Type your message here!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+    <Button
+        android:id="@+id/dmButton"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_alignLeft="@+id/dmMessage"
+        android:layout_alignStart="@+id/dmMessage"
+        android:layout_below="@+id/dmMessage"
+        android:layout_marginLeft="15dp"
+        android:text="Send" />
+
+    <Button
+        android:id="@+id/dmButton2"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_alignBottom="@+id/dmButton"
+        android:layout_alignEnd="@+id/dmMessage"
+        android:layout_alignRight="@+id/dmMessage"
+        android:layout_marginRight="15dp"
+        android:text="Cancel" />
+</RelativeLayout>

@@ -48,5 +48,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        dmButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DmActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
