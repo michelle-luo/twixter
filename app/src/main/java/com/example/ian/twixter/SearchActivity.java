@@ -8,17 +8,17 @@ import android.widget.Button;
 
 public class SearchActivity extends AppCompatActivity {
 
-    Button searchusername, searchhashtag;
+    Button searchUsername, searchHashtag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        searchusername = (Button) findViewById(R.id.searchByUsername);
-        searchhashtag = (Button) findViewById(R.id.searchByHashtag);
+        searchUsername = (Button) findViewById(R.id.searchByUsername);
+        searchHashtag = (Button) findViewById(R.id.searchByHashtag);
 
-        searchusername.setOnClickListener(new View.OnClickListener() {
+        searchUsername.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this, SearchUsernameActivity.class);
                 startActivity(intent);
