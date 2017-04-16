@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class DmActivity extends AppCompatActivity {
 
-    Button dmButton, dmButton2;
+    Button dmButton, cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,12 +16,17 @@ public class DmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dm);
 
         dmButton = (Button) findViewById(R.id.dmButton);
-        dmButton2 = (Button) findViewById(R.id.dmButton2);
+        cancelButton = (Button) findViewById(R.id.dmButton2);
 
-        dmButton2.setOnClickListener(new View.OnClickListener() {
+        dmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(DmActivity.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
             }
         });
     }
