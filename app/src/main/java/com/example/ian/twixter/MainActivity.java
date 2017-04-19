@@ -12,10 +12,11 @@ public class MainActivity extends AppCompatActivity {
     TextView header;
     String headerText;
     Button feedButton, postButton, searchButton, dmButton, helpButton;
-    SendText sendSMS = new SendText();
+    SendText sendSMS;
 
     protected void updateHeader() {
-        headerText = "You have sent " + Integer.toString(sendSMS.getSMSCount()) + " texts today.";
+        headerText = "You have used "
+                + Integer.toString(sendSMS.getSMSCount()) + " texts today.";
         header.setText(headerText);
     }
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sendSMS = new SendText();
 
         header = (TextView) findViewById(R.id.msgToday);
         feedButton = (Button) findViewById(R.id.feedButton);

@@ -13,4 +13,8 @@
     <string name="how_to">How do I use it?</string>
     <string name="twixter_desc">Twixter is an app that allows you to interact with Twitter via text while giving the appearance that you\'re browsing normally. You can see how many texts you\'ve used today on the homepage.</string>
     <string name="how_to_use">Select the action you\'d like to take on the homepage. Type your tweet, message, or search keyword - then hit send. Twixter will send your message on your behalf. If you searched for a term or clicked on feed, you\'ll be able to see the tweets you requested.</string>
+    <string name="title_activity_search_hashtag">SearchHashtagActivity</string>
+    <string name="search_hash">Search</string>
+    <string name="num_results">How many results do you want?</string>
+    <string name="twilioNumber">+17312567648</string>
 </resources>

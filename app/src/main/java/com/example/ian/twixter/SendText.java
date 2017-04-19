@@ -51,7 +51,7 @@ class SendText implements Parcelable {
             numSMS++;
         }
         catch (Exception e) {
-            Toast.makeText(context, "Tweet failed to send: " + e.getMessage(),
+            Toast.makeText(context, "Failed to send: " + e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
         return this;

@@ -24,6 +24,7 @@ public class DmActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
