@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Twixter</string>
     <string name="send_post">Send Post</string>
     <string name="cancel_post">Cancel</string>
