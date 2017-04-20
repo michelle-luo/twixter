@@ -32,6 +32,9 @@ public class SMSReceiver extends BroadcastReceiver {
 
                         message = currentSMS.getDisplayMessageBody();
                         Toast.makeText(context, "senderNum: " + senderNo + " :\n message: " + message, Toast.LENGTH_LONG).show();
+
+                        FeedActivity inst = FeedActivity.instance();
+                        inst.updateList(message);
                     }
                     this.abortBroadcast();
                     // End of loop
