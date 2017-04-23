@@ -49,4 +49,14 @@
         android:layout_alignRight="@+id/dmMessage"
         android:layout_marginRight="15dp"
         android:text="Cancel" />
+
+    <Button
+        android:id="@+id/helpDm"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:text="Help"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="513dp" />
 </RelativeLayout>

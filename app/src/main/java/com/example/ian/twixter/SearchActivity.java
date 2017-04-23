@@ -22,6 +22,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this, SearchUsernameActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -30,6 +31,7 @@ public class SearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchActivity.this, SearchHashtagActivity.class);
                 // intent.putExtra("sendSMS", (Parcelable)sendSMS);
                 startActivity(intent);
+                finish();
             }
         });
     }

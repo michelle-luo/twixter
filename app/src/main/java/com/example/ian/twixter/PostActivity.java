@@ -1,7 +1,9 @@
 package com.example.ian.twixter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -48,6 +50,19 @@ public class PostActivity extends AppCompatActivity {
                         getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
+
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        // if you are redirecting from a fragment then use getActivity() as the context.
+                        startActivity(new Intent(PostActivity.this, MainActivity.class));
+                        finish();
+                    }
+                };
+
+                Handler h = new Handler();
+                // The Runnable will be executed after the given delay time
+                h.postDelayed(r, 1000); // will be delayed for 1 second
 
             }
         });
