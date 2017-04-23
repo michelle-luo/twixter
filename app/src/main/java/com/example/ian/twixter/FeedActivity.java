@@ -3,19 +3,21 @@ package com.example.ian.twixter;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FeedActivity extends AppCompatActivity {
 
     private static FeedActivity inst;
     ArrayList<String> smsMessagesList = new ArrayList<String>();
     ListView smsListView;
-    ArrayAdapter arrayAdapter;
+    ArrayAdapter<String> arrayAdapter;
 
     public static FeedActivity instance() {
         return inst;
@@ -30,7 +32,7 @@ public class FeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         smsListView = (ListView) findViewById(R.id.SMSList);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, smsMessagesList);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, smsMessagesList);
         smsListView.setAdapter(arrayAdapter);
 //        smsListView.setOnItemClickListener(this);
 
@@ -40,14 +42,25 @@ public class FeedActivity extends AppCompatActivity {
     public void refreshSmsInbox() {
         ContentResolver contentResolver = getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null, null, null, null);
+        assert smsInboxCursor != null;
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
-        if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
+        if (indexBody < 0 || !smsInboxCursor.moveToFirst())
+            return;
         arrayAdapter.clear();
         do {
-            String str = "SMS From: " + smsInboxCursor.getString(indexAddress) +
-                    "\n" + smsInboxCursor.getString(indexBody) + "\n";
-            arrayAdapter.add(str);
+            // Log.d("REFRESH SMS", smsInboxCursor.getString(indexAddress));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (Objects.equals(smsInboxCursor.getString(indexAddress), "7312567648") ||
+                        Objects.equals(smsInboxCursor.getString(indexAddress), "40404")) {
+                    String sms = smsInboxCursor.getString(indexBody).replace("Sent from your Twilio trial account - ", "");
+                    String[] body = sms.split(" ", 2);
+                    String username = body[0];
+                    String tweet = body[1];
+                    String str = "Tweet from " + username + "\n" + tweet + "\n";
+                    arrayAdapter.add(str);
+                }
+            }
         } while (smsInboxCursor.moveToNext());
     }
 

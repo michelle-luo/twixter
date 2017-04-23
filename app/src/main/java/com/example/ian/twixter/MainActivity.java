@@ -1,23 +1,11 @@
 package com.example.ian.twixter;
 
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     TextView header;
@@ -51,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         postButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PostActivity.class);
-                intent.putExtra("sendSMS", (Parcelable) sendSMS);
+                intent.putExtra("sendSMS", sendSMS);
                 startActivity(intent);
                 updateHeader();
             }
@@ -60,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         feedButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, FeedActivity.class);
-                intent.putExtra("sendSMS", (Parcelable) sendSMS);
+                intent.putExtra("sendSMS", sendSMS);
                 startActivity(intent);
                 updateHeader();
             }
@@ -69,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                intent.putExtra("sendSMS", (Parcelable) sendSMS);
+                intent.putExtra("sendSMS", sendSMS);
                 startActivity(intent);
                 updateHeader();
             }
