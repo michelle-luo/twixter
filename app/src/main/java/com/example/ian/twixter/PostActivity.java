@@ -1,9 +1,11 @@
 package com.example.ian.twixter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -12,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class PostActivity extends AppCompatActivity {
-    Button sendButton, cancelButton;
+    Button sendButton, cancelButton, helpPost;
     SendText sendSMS;
 
     @Override
@@ -22,6 +24,7 @@ public class PostActivity extends AppCompatActivity {
 
         sendButton = (Button) findViewById(R.id.sendPost);
         cancelButton = (Button) findViewById(R.id.cancelPost);
+        helpPost = (Button) findViewById(R.id.helpPost);
 
         sendSMS = getIntent().getExtras().getParcelable("sendSMS");
 
@@ -64,6 +67,37 @@ public class PostActivity extends AppCompatActivity {
                 // The Runnable will be executed after the given delay time
                 h.postDelayed(r, 1000); // will be delayed for 1 second
 
+            }
+        });
+
+        helpPost.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                AlertDialog.Builder helpDialog = new AlertDialog.Builder(PostActivity.this);
+
+                helpDialog.setTitle("Help");
+                helpDialog.setMessage("This is the help section for Post Page");
+                helpDialog.setCancelable(true);
+
+                helpDialog.setPositiveButton(
+                        "Ok get it",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                helpDialog.setNegativeButton(
+                        "Still confused",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                Intent intent = new Intent(PostActivity.this, HelpActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                AlertDialog alert = helpDialog.create();
+                alert.show();
             }
         });
 

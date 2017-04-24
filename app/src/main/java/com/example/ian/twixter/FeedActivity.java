@@ -1,12 +1,17 @@
 package com.example.ian.twixter;
 
 import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -17,6 +22,7 @@ public class FeedActivity extends AppCompatActivity {
     private static FeedActivity inst;
     ArrayList<String> smsMessagesList = new ArrayList<String>();
     ListView smsListView;
+    Button helpFeed;
     ArrayAdapter<String> arrayAdapter;
 
     public static FeedActivity instance() {
@@ -32,9 +38,41 @@ public class FeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         smsListView = (ListView) findViewById(R.id.SMSList);
+        helpFeed = (Button) findViewById(R.id.helpFeed);
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, smsMessagesList);
         smsListView.setAdapter(arrayAdapter);
 //        smsListView.setOnItemClickListener(this);
+
+        helpFeed.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                AlertDialog.Builder helpDialog = new AlertDialog.Builder(FeedActivity.this);
+
+                helpDialog.setTitle("Help");
+                helpDialog.setMessage("This is the help section for Feed Page");
+                helpDialog.setCancelable(true);
+
+                helpDialog.setPositiveButton(
+                        "Ok get it",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                helpDialog.setNegativeButton(
+                        "Still confused",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                Intent intent = new Intent(FeedActivity.this, HelpActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                AlertDialog alert = helpDialog.create();
+                alert.show();
+            }
+        });
 
         refreshSmsInbox();
     }
