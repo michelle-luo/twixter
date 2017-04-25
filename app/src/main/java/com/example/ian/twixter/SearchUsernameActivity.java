@@ -60,7 +60,7 @@ public class SearchUsernameActivity extends AppCompatActivity {
         });
 
         helpSearchUser.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                public void onClick(View v) {
                 AlertDialog.Builder helpDialog = new AlertDialog.Builder(SearchUsernameActivity.this);
 
                 helpDialog.setTitle("Help");
@@ -90,6 +90,12 @@ public class SearchUsernameActivity extends AppCompatActivity {
 
                 AlertDialog alert = helpDialog.create();
                 alert.show();
+            }
+        });
+
+        searchUserCancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
             }
         });
     }
