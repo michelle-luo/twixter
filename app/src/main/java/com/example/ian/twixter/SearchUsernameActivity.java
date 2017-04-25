@@ -1,5 +1,6 @@
 package com.example.ian.twixter;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.widget.SearchView;
 public class SearchUsernameActivity extends AppCompatActivity {
     SearchView searchUserText;
     EditText numTextBox;
-    Button searchUserButton, helpSearchUser;
+    Button searchUserButton, helpSearchUser, searchUserCancel;
     Intent intent;
 
     @Override
@@ -23,28 +24,32 @@ public class SearchUsernameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_username);
 
         searchUserText = (SearchView) findViewById(R.id.searchUserText);
-        searchUserButton = (Button) findViewById(R.id.searchUserButton);
-        searchUserText.setQueryHint("Search for a user's tweets");
-        helpSearchUser = (Button) findViewById(R.id.helpSearchUser);
         numTextBox = (EditText) findViewById(R.id.numTextBox);
-        numTextBox.setHint("How many tweets?");
+        searchUserButton = (Button) findViewById(R.id.searchUserButton);
+        searchUserCancel = (Button) findViewById(R.id.searchUserCancel);
+        helpSearchUser = (Button) findViewById(R.id.helpSearchUser);
 
-        intent = new Intent();
+        searchUserText.setQueryHint("Search for a user's tweets");
+        numTextBox.setHint("How many tweets?");
 
         searchUserButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String username = searchUserText.getQuery().toString();
+                username = username.replace("/[^\\w]/", "");
                 int numTexts = Integer.parseInt(numTextBox.getText().toString());
 
                 String message = "su " + numTexts + " " + username;
                 SendText.sendText(getBaseContext(), "+17312567648", message);
-                // one text for query, more for search results
-                intent.putExtra("numSms", 1 + numTexts);
-                setResult(RESULT_OK, intent);
+
+                intent = new Intent();
+                // one text for sending query
+                intent.putExtra("numSms", 1);
+                setResult(Activity.RESULT_OK, intent);
 
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
+                        setResult(RESULT_OK, intent);
                         finish();
                     }
                 };
@@ -59,7 +64,9 @@ public class SearchUsernameActivity extends AppCompatActivity {
                 AlertDialog.Builder helpDialog = new AlertDialog.Builder(SearchUsernameActivity.this);
 
                 helpDialog.setTitle("Help");
-                helpDialog.setMessage("This is the help section for Search by Username Page");
+                helpDialog.setMessage("Search for a specific username here to see tweets that" +
+                        "pertain to them. Type the username in the first box and input the " +
+                        "number of tweets you would like to see in the second box.");
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(
@@ -69,6 +76,7 @@ public class SearchUsernameActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         });
+
 
                 helpDialog.setNegativeButton(
                         "Still confused",
@@ -85,4 +93,5 @@ public class SearchUsernameActivity extends AppCompatActivity {
             }
         });
     }
+
 }

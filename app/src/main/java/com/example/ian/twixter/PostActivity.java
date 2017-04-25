@@ -1,8 +1,10 @@
 package com.example.ian.twixter;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -17,7 +19,6 @@ public class PostActivity extends AppCompatActivity {
     Button sendButton, cancelButton, helpPost;
     TextView charCounter;
     Intent intent;
-    TextWatcher countChars;
     EditText tweetText;
 
     @Override
@@ -31,7 +32,7 @@ public class PostActivity extends AppCompatActivity {
         charCounter = (TextView) findViewById(R.id.charCount);
         tweetText = (EditText) findViewById(R.id.editPost);
 
-        intent = new Intent();
+        intent = getIntent();
 
         tweetText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -41,7 +42,7 @@ public class PostActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String newCount = Integer.toString(i2 - i) + "/140";
+                String newCount = charSequence.toString().length() + "/140";
                 charCounter.setText(newCount);
             }
 
@@ -71,8 +72,18 @@ public class PostActivity extends AppCompatActivity {
                     /* send message */
                     SendText.sendText(getBaseContext(), "40404", message);
                     intent.putExtra("numSms", 1);
-                    setResult(RESULT_OK, intent);
+                    setResult(Activity.RESULT_OK, intent);
+
+                    Runnable r = new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    };
+                    Handler h = new Handler();
+                    h.postDelayed(r, 1000);
                 }
+
             }
         });
 
@@ -81,7 +92,8 @@ public class PostActivity extends AppCompatActivity {
                 AlertDialog.Builder helpDialog = new AlertDialog.Builder(PostActivity.this);
 
                 helpDialog.setTitle("Help");
-                helpDialog.setMessage("This is the help section for Post Page");
+                helpDialog.setMessage("Send a tweet and share your thoughts with the world! " +
+                        "Type the message that you want to share in the box, then hit send.");
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(

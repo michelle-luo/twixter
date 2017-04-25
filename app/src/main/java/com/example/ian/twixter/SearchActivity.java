@@ -41,7 +41,8 @@ public class SearchActivity extends AppCompatActivity {
                 AlertDialog.Builder helpDialog = new AlertDialog.Builder(SearchActivity.this);
 
                 helpDialog.setTitle("Help");
-                helpDialog.setMessage("This is the help section for Search Page");
+                helpDialog.setMessage("Look up things to explore from Twitter. You can search " +
+                        "for tweets by username, or by hashtag.");
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(

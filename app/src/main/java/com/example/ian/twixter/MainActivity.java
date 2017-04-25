@@ -61,10 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*
                 Intent intent = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(intent);
-                */
             }
         });
 
@@ -81,11 +79,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
+                Log.d("onactivityresult", "updating header");
                 numSms += data.getIntExtra("numSms", 0);
                 updateHeader(numSms);
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                Log.d("SMS CANCELED", "onActivityResult");
+            if (resultCode == Activity.RESULT_CANCELED && data == null) {
+                Log.d("RESULT==CANCELED", "onActivityResult");
             }
         }
     }

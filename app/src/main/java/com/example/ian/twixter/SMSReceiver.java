@@ -16,13 +16,16 @@ public class SMSReceiver extends BroadcastReceiver {
             if (bundle != null) {
                 Object[] pdu_Objects = (Object[]) bundle.get("pdus");
                 if (pdu_Objects != null) {
-
                     for (Object aObject : pdu_Objects) {
                         SmsMessage currentSMS = getIncomingMessage(aObject, bundle);
 
                         String senderNo = currentSMS.getDisplayOriginatingAddress();
                         String message = currentSMS.getDisplayMessageBody();
-                        // Toast.makeText(context, "senderNum: " + senderNo + " :\n message: " + message, Toast.LENGTH_LONG).show();
+
+                        /*
+                        Toast.makeText(context, "senderNum: " + senderNo + " :\n message: " +
+                            message, Toast.LENGTH_LONG).show();
+                        */
 
                         /*
                         FeedActivity inst = new FeedActivity();
@@ -44,7 +47,8 @@ public class SMSReceiver extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String format = bundle.getString("format");
             currentSMS = SmsMessage.createFromPdu((byte[]) aObject, format);
-        } else {
+        }
+        else {
             currentSMS = SmsMessage.createFromPdu((byte[]) aObject);
         }
         return currentSMS;

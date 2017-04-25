@@ -41,14 +41,15 @@ public class FeedActivity extends AppCompatActivity {
         helpFeed = (Button) findViewById(R.id.helpFeed);
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, smsMessagesList);
         smsListView.setAdapter(arrayAdapter);
-//        smsListView.setOnItemClickListener(this);
 
         helpFeed.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder helpDialog = new AlertDialog.Builder(FeedActivity.this);
 
                 helpDialog.setTitle("Help");
-                helpDialog.setMessage("This is the help section for Feed Page");
+                helpDialog.setMessage("Here are all the tweets you've searched for. " +
+                        "To add more tweets to this list, use the Search menu to find new " +
+                        "things to discover.");
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(
@@ -85,12 +86,13 @@ public class FeedActivity extends AppCompatActivity {
         int indexAddress = smsInboxCursor.getColumnIndex("address");
         if (indexBody < 0 || !smsInboxCursor.moveToFirst())
             return;
+
         arrayAdapter.clear();
+
         do {
             // Log.d("REFRESH SMS", smsInboxCursor.getString(indexAddress));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                if (Objects.equals(smsInboxCursor.getString(indexAddress), "7312567648") ||
-                        Objects.equals(smsInboxCursor.getString(indexAddress), "40404")) {
+                if (Objects.equals(smsInboxCursor.getString(indexAddress), "7312567648")) {
                     String sms = smsInboxCursor.getString(indexBody).replace("Sent from your Twilio trial account - ", "");
                     String[] body = sms.split(" ", 2);
                     String username = body[0];

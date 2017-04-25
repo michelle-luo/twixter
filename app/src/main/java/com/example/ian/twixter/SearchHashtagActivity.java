@@ -1,5 +1,6 @@
 package com.example.ian.twixter;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,34 +31,33 @@ public class SearchHashtagActivity extends AppCompatActivity {
         numTexts = (EditText) findViewById(R.id.numTextBox);
         numTexts.setHint("How many tweets?");
 
-        intent = new Intent();
+        intent = getIntent();
 
         searchHashButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                intent.putExtra("numSms", 1);
+                setResult(Activity.RESULT_OK, intent);
+
                 String parameter = search.getQuery().toString();
                 parameter = parameter.replaceAll("/[^\\w]/", "");
                 int numberOfTexts = Integer.parseInt(numTexts.getText().toString());
                 if (numberOfTexts > 10) {
                     numberOfTexts = 10;
                 }
+
                 String msg = "sh " + numberOfTexts + " " + parameter;
 
                 /* send message */
                 SendText.sendText(getBaseContext(), "+17312567648", msg);
-                intent.putExtra("numSms", 1 + numberOfTexts);
-                setResult(RESULT_OK, intent);
 
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
-                        // if you are redirecting from a fragment then use getActivity() as the context.
                         finish();
                     }
                 };
-
                 Handler h = new Handler();
-                // The Runnable will be executed after the given delay time
-                h.postDelayed(r, 1000); // will be delayed for 1 second
+                h.postDelayed(r, 1000);
             }
         });
 
@@ -72,7 +72,10 @@ public class SearchHashtagActivity extends AppCompatActivity {
                 AlertDialog.Builder helpDialog = new AlertDialog.Builder(SearchHashtagActivity.this);
 
                 helpDialog.setTitle("Help");
-                helpDialog.setMessage("This is the help section for Search by Hashtag Page");
+                helpDialog.setMessage("To see what people are saying about a specific hashtag, " +
+                        "type the hashtag you want to search in the first box. In the second " +
+                        "box, input the number of tweets you want to see. Then hit send, and " +
+                        "check out your feed.");
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(
@@ -98,4 +101,5 @@ public class SearchHashtagActivity extends AppCompatActivity {
             }
         });
     }
+
 }

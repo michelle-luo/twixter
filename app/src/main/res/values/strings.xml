@@ -18,4 +18,6 @@
     <string name="search_hash">Search</string>
     <string name="num_results">How many results do you want?</string>
     <string name="twilioNumber">+17312567648</string>
+    <string name="twitter_desc">Twitter is a popular social media app. Users can share their thoughts in \"tweets,\" or snippets of thoughts that are less than 140 characters. There are almost one billion accounts on Twitter, and many celebrities, public figures, experts and politicians are active Twitter users.</string>
+    <string name="hash_desc">A hashtag is a label (usually in the form \"#popularTermHere\") that makes it easy for Twitter users to find tweets about popular topics in the world right now. These hashtags are embedded inside of tweets. Anyone can start a hashtag, and you can search for tweets that include a hashtag in the Search menu.</string>
 </resources>
