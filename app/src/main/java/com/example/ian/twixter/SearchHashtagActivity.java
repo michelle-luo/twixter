@@ -53,6 +53,8 @@ public class SearchHashtagActivity extends AppCompatActivity {
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
+                        Intent intent = new Intent(SearchHashtagActivity.this, FeedActivity.class);
+                        startActivity(intent);
                         finish();
                     }
                 };

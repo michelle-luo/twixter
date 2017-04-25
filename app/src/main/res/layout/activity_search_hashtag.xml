@@ -23,7 +23,7 @@
 
     <Button
         android:id="@+id/helpSearchHash"
-        android:layout_width="88dp"
+        android:layout_width="55dp"
         android:layout_height="55dp"
         android:text="Help"
         android:textSize="12sp"

@@ -50,6 +50,8 @@ public class SearchUsernameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         setResult(RESULT_OK, intent);
+                        Intent intent = new Intent(SearchUsernameActivity.this, FeedActivity.class);
+                        startActivity(intent);
                         finish();
                     }
                 };
