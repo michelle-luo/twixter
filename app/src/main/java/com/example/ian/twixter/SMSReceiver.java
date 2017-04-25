@@ -5,36 +5,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.telephony.SmsMessage;
-import android.util.Log;
-import android.widget.Toast;
 
 public class SMSReceiver extends BroadcastReceiver {
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private Bundle bundle;
-    private SmsMessage currentSMS;
-    private String message;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
-            bundle = intent.getExtras();
+            Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 Object[] pdu_Objects = (Object[]) bundle.get("pdus");
                 if (pdu_Objects != null) {
 
                     for (Object aObject : pdu_Objects) {
-
-                        currentSMS = getIncomingMessage(aObject, bundle);
+                        SmsMessage currentSMS = getIncomingMessage(aObject, bundle);
 
                         String senderNo = currentSMS.getDisplayOriginatingAddress();
+                        String message = currentSMS.getDisplayMessageBody();
+                        // Toast.makeText(context, "senderNum: " + senderNo + " :\n message: " + message, Toast.LENGTH_LONG).show();
 
-                        message = currentSMS.getDisplayMessageBody();
-                        Toast.makeText(context, "senderNum: " + senderNo + " :\n message: " + message, Toast.LENGTH_LONG).show();
-
-                        FeedActivity inst = FeedActivity.instance();
-                        inst.updateList(message);
+                        /*
+                        FeedActivity inst = new FeedActivity();
+                        if (message != null) {
+                            inst.updateList(message);
+                        }
+                        */
                     }
                     this.abortBroadcast();
                     // End of loop

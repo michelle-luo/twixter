@@ -47,4 +47,14 @@
         tools:layout_editor_absoluteX="302dp"
         tools:layout_editor_absoluteY="513dp" />
 
+    <TextView
+        android:id="@+id/charCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cancelPost"
+        android:layout_alignEnd="@+id/editPost"
+        android:layout_alignRight="@+id/editPost"
+        android:layout_marginBottom="11dp"
+        android:text="0/140" />
+
 </RelativeLayout>

@@ -15,7 +15,7 @@ public class SearchHashtagActivity extends AppCompatActivity {
     Button searchHashButton, cancelHashButton, helpSearchHash;
     SearchView search;
     EditText numTexts;
-    SendText sendSMS;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,12 @@ public class SearchHashtagActivity extends AppCompatActivity {
         searchHashButton = (Button) findViewById(R.id.searchHashButton);
         cancelHashButton = (Button) findViewById(R.id.cancelHashButton);
         helpSearchHash = (Button) findViewById(R.id.helpSearchHash);
-        search = (SearchView) findViewById(R.id.simpleSearchView);
+        search = (SearchView) findViewById(R.id.searchUserText);
+        search.setQueryHint("Search for a topic here");
         numTexts = (EditText) findViewById(R.id.numTextBox);
+        numTexts.setHint("How many tweets?");
 
-        // sendSMS = getIntent().getExtras().getParcelable("sendSMS");
-        // fix this lol
-        sendSMS = new SendText();
+        intent = new Intent();
 
         searchHashButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -43,13 +43,14 @@ public class SearchHashtagActivity extends AppCompatActivity {
                 String msg = "sh " + numberOfTexts + " " + parameter;
 
                 /* send message */
-                sendSMS = sendSMS.sendText(getBaseContext(), "+17312567648", msg);
+                SendText.sendText(getBaseContext(), "+17312567648", msg);
+                intent.putExtra("numSms", 1 + numberOfTexts);
+                setResult(RESULT_OK, intent);
 
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
                         // if you are redirecting from a fragment then use getActivity() as the context.
-                        startActivity(new Intent(SearchHashtagActivity.this, FeedActivity.class));
                         finish();
                     }
                 };
@@ -75,7 +76,7 @@ public class SearchHashtagActivity extends AppCompatActivity {
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(
-                        "Ok get it",
+                        "Ok, I get it",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();

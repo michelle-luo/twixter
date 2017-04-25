@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class SearchActivity extends AppCompatActivity {
-
     Button searchUsername, searchHashtag, helpSearch;
 
     @Override
@@ -32,7 +31,6 @@ public class SearchActivity extends AppCompatActivity {
         searchHashtag.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this, SearchHashtagActivity.class);
-                // intent.putExtra("sendSMS", (Parcelable)sendSMS);
                 startActivity(intent);
                 finish();
             }
@@ -47,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(
-                        "Ok get it",
+                        "Ok, I get it",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();

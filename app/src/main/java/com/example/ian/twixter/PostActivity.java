@@ -1,21 +1,24 @@
 package com.example.ian.twixter;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class PostActivity extends AppCompatActivity {
     Button sendButton, cancelButton, helpPost;
-    SendText sendSMS;
+    TextView charCounter;
+    Intent intent;
+    TextWatcher countChars;
+    EditText tweetText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,28 @@ public class PostActivity extends AppCompatActivity {
         sendButton = (Button) findViewById(R.id.sendPost);
         cancelButton = (Button) findViewById(R.id.cancelPost);
         helpPost = (Button) findViewById(R.id.helpPost);
+        charCounter = (TextView) findViewById(R.id.charCount);
+        tweetText = (EditText) findViewById(R.id.editPost);
 
-        sendSMS = getIntent().getExtras().getParcelable("sendSMS");
+        intent = new Intent();
+
+        tweetText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String newCount = Integer.toString(i2 - i) + "/140";
+                charCounter.setText(newCount);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -38,35 +61,18 @@ public class PostActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Please enter a Tweet.",
                             Toast.LENGTH_LONG).show();
                 }
-                if (message.length() > 140) {
+                else if (message.length() > 140) {
                     Toast.makeText(getBaseContext(), "You are " +
                                     Integer.toString(message.length() - 140) +
                                     " characters over the 140 character limit, please try again!",
                             Toast.LENGTH_LONG).show();
                 }
-
-                /* send message */
-                sendSMS = sendSMS.sendText(getBaseContext(), "40404", message);
-
-                /* hide keyboard after click */
-                InputMethodManager inputManager = (InputMethodManager)
-                        getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS);
-
-                Runnable r = new Runnable() {
-                    @Override
-                    public void run() {
-                        // if you are redirecting from a fragment then use getActivity() as the context.
-                        startActivity(new Intent(PostActivity.this, MainActivity.class));
-                        finish();
-                    }
-                };
-
-                Handler h = new Handler();
-                // The Runnable will be executed after the given delay time
-                h.postDelayed(r, 1000); // will be delayed for 1 second
-
+                else {
+                    /* send message */
+                    SendText.sendText(getBaseContext(), "40404", message);
+                    intent.putExtra("numSms", 1);
+                    setResult(RESULT_OK, intent);
+                }
             }
         });
 
@@ -79,7 +85,7 @@ public class PostActivity extends AppCompatActivity {
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(
-                        "Ok get it",
+                        "Ok, I get it",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
