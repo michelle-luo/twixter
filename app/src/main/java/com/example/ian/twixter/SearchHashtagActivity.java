@@ -3,14 +3,19 @@ package com.example.ian.twixter;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.Toast;
+
+import java.util.Objects;
 
 public class SearchHashtagActivity extends AppCompatActivity {
     Button searchHashButton, cancelHashButton, helpSearchHash;
@@ -34,13 +39,33 @@ public class SearchHashtagActivity extends AppCompatActivity {
         intent = getIntent();
 
         searchHashButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             public void onClick(View v) {
                 intent.putExtra("numSms", 1);
                 setResult(Activity.RESULT_OK, intent);
 
                 String parameter = search.getQuery().toString();
                 parameter = parameter.replaceAll("/[^\\w]/", "");
+                if (parameter.length() == 0 || parameter == null) {
+                    Toast.makeText(getBaseContext(), "Please enter a hashtag to search",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                String toNum = numTexts.getText().toString();
+
+                if (Objects.equals(toNum, "")) {
+                    Toast.makeText(getBaseContext(), "Please choose a number of tweets to receive",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 int numberOfTexts = Integer.parseInt(numTexts.getText().toString());
+                if (numberOfTexts == 0) {
+                    Toast.makeText(getBaseContext(), "Please choose a number of tweets to receive",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (numberOfTexts > 10) {
                     numberOfTexts = 10;
                 }
@@ -59,7 +84,7 @@ public class SearchHashtagActivity extends AppCompatActivity {
                     }
                 };
                 Handler h = new Handler();
-                h.postDelayed(r, 1000);
+                h.postDelayed(r, 3000);
             }
         });
 

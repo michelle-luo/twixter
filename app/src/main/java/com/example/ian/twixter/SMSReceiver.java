@@ -27,12 +27,10 @@ public class SMSReceiver extends BroadcastReceiver {
                             message, Toast.LENGTH_LONG).show();
                         */
 
-                        /*
-                        FeedActivity inst = new FeedActivity();
+                        FeedActivity inst = FeedActivity.instance();
                         if (message != null) {
                             inst.updateList(message);
                         }
-                        */
                     }
                     this.abortBroadcast();
                     // End of loop

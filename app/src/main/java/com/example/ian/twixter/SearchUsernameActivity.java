@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.Toast;
+
+import java.util.Objects;
 
 public class SearchUsernameActivity extends AppCompatActivity {
     SearchView searchUserText;
@@ -36,7 +39,23 @@ public class SearchUsernameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = searchUserText.getQuery().toString();
                 username = username.replace("/[^\\w]/", "");
-                int numTexts = Integer.parseInt(numTextBox.getText().toString());
+                if (username == null || username.length() == 0) {
+                    Toast.makeText(getBaseContext(), "Please enter a username to search",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                String toNum = numTextBox.getText().toString();
+
+                if (Objects.equals(toNum, "")) {
+                    Toast.makeText(getBaseContext(), "Please choose a number of tweets to receive",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                int numTexts = Integer.parseInt(toNum);
+
+                if (numTexts > 10) {
+                    numTexts = 10;
+                }
 
                 String message = "su " + numTexts + " " + username;
                 SendText.sendText(getBaseContext(), "+17312567648", message);
@@ -57,7 +76,7 @@ public class SearchUsernameActivity extends AppCompatActivity {
                 };
 
                 Handler h = new Handler();
-                h.postDelayed(r, 1000);
+                h.postDelayed(r, 3000);
             }
         });
 

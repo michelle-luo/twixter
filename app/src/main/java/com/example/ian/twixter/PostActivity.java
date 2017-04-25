@@ -61,28 +61,29 @@ public class PostActivity extends AppCompatActivity {
                 if (message.length() == 0) {
                     Toast.makeText(getBaseContext(), "Please enter a Tweet.",
                             Toast.LENGTH_LONG).show();
+                    return;
                 }
-                else if (message.length() > 140) {
+                if (message.length() > 140) {
                     Toast.makeText(getBaseContext(), "You are " +
                                     Integer.toString(message.length() - 140) +
                                     " characters over the 140 character limit, please try again!",
                             Toast.LENGTH_LONG).show();
+                    return;
                 }
-                else {
-                    /* send message */
-                    SendText.sendText(getBaseContext(), "40404", message);
-                    intent.putExtra("numSms", 1);
-                    setResult(Activity.RESULT_OK, intent);
 
-                    Runnable r = new Runnable() {
-                        @Override
-                        public void run() {
-                            finish();
-                        }
-                    };
-                    Handler h = new Handler();
-                    h.postDelayed(r, 1000);
-                }
+                /* send message */
+                SendText.sendText(getBaseContext(), "40404", message);
+                intent.putExtra("numSms", 1);
+                setResult(Activity.RESULT_OK, intent);
+
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                };
+                Handler h = new Handler();
+                h.postDelayed(r, 1000);
 
             }
         });
