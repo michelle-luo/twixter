@@ -60,14 +60,14 @@ public class PostActivity extends AppCompatActivity {
                 /* check message length */
                 if (message.length() == 0) {
                     Toast.makeText(getBaseContext(), "Please enter a Tweet.",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (message.length() > 140) {
                     Toast.makeText(getBaseContext(), "You are " +
                                     Integer.toString(message.length() - 140) +
                                     " characters over the 140 character limit, please try again!",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 

@@ -46,9 +46,9 @@ public class SearchHashtagActivity extends AppCompatActivity {
 
                 String parameter = search.getQuery().toString();
                 parameter = parameter.replaceAll("/[^\\w]/", "");
-                if (parameter.length() == 0 || parameter == null) {
+                if (parameter.length() == 0) {
                     Toast.makeText(getBaseContext(), "Please enter a hashtag to search",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -56,14 +56,14 @@ public class SearchHashtagActivity extends AppCompatActivity {
 
                 if (Objects.equals(toNum, "")) {
                     Toast.makeText(getBaseContext(), "Please choose a number of tweets to receive",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 int numberOfTexts = Integer.parseInt(numTexts.getText().toString());
                 if (numberOfTexts == 0) {
                     Toast.makeText(getBaseContext(), "Please choose a number of tweets to receive",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (numberOfTexts > 10) {

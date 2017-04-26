@@ -41,22 +41,21 @@ public class SearchUsernameActivity extends AppCompatActivity {
                 username = username.replace("/[^\\w]/", "");
                 if (username == null || username.length() == 0) {
                     Toast.makeText(getBaseContext(), "Please enter a username to search",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String toNum = numTextBox.getText().toString();
 
                 if (Objects.equals(toNum, "")) {
                     Toast.makeText(getBaseContext(), "Please choose a number of tweets to receive",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
-                int numTexts = Integer.parseInt(toNum);
 
+                int numTexts = Integer.parseInt(toNum);
                 if (numTexts > 10) {
                     numTexts = 10;
                 }
-
                 String message = "su " + numTexts + " " + username;
                 SendText.sendText(getBaseContext(), "+17312567648", message);
 
