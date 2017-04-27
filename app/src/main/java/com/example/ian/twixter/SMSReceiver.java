@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
+import java.util.Objects;
+
 public class SMSReceiver extends BroadcastReceiver {
 
     @Override
@@ -21,11 +23,11 @@ public class SMSReceiver extends BroadcastReceiver {
 
                         String senderNo = currentSMS.getDisplayOriginatingAddress();
                         String message = currentSMS.getDisplayMessageBody();
-
-                        /*
-                        Toast.makeText(context, "senderNum: " + senderNo + " :\n message: " +
-                            message, Toast.LENGTH_LONG).show();
-                        */
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            if (Objects.equals(senderNo, Integer.toString(R.string.twilio_num))) {
+                                message = message.replace(Integer.toString(R.string.twilio_message), "");
+                            }
+                        }
 
                         FeedActivity inst = FeedActivity.instance();
                         if (message != null) {
@@ -33,10 +35,9 @@ public class SMSReceiver extends BroadcastReceiver {
                         }
                     }
                     this.abortBroadcast();
-                    // End of loop
                 }
             }
-        } // bundle null
+        }
     }
 
 

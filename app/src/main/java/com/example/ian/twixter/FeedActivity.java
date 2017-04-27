@@ -93,11 +93,11 @@ public class FeedActivity extends AppCompatActivity {
             // Log.d("REFRESH SMS", smsInboxCursor.getString(indexAddress));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 if (Objects.equals(smsInboxCursor.getString(indexAddress), "7312567648")) {
-                    String sms = smsInboxCursor.getString(indexBody).replace("Sent from your Twilio trial account - ", "");
+                    String sms = smsInboxCursor.getString(indexBody);
                     String[] body = sms.split(" ", 2);
                     String username = body[0];
                     String tweet = body[1];
-                    String str = "Tweet from " + username + "\n" + tweet + "\n";
+                    String str = username + ":\n" + tweet + "\n";
                     arrayAdapter.add(str);
                 }
             }

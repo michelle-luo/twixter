@@ -3,6 +3,7 @@ package com.example.ian.twixter;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -46,10 +47,12 @@ public class SearchUsernameActivity extends AppCompatActivity {
                 }
                 String toNum = numTextBox.getText().toString();
 
-                if (Objects.equals(toNum, "")) {
-                    Toast.makeText(getBaseContext(), "Please choose a number of tweets to receive",
-                            Toast.LENGTH_SHORT).show();
-                    return;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    if (Objects.equals(toNum, "")) {
+                        Toast.makeText(getBaseContext(), "Please choose a number of tweets to receive",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
 
                 int numTexts = Integer.parseInt(toNum);
@@ -57,7 +60,8 @@ public class SearchUsernameActivity extends AppCompatActivity {
                     numTexts = 10;
                 }
                 String message = "su " + numTexts + " " + username;
-                SendText.sendText(getBaseContext(), "+17312567648", message);
+                SendText.sendText(getBaseContext(), Integer.toString(R.string.twilio_num),
+                        message);
 
                 intent = new Intent();
                 // one text for sending query
