@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class SearchActivity extends AppCompatActivity {
-    Button searchUsername, searchHashtag, helpSearch;
+    Button searchUsername, searchHashtag, trendingTopics, helpSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,8 @@ public class SearchActivity extends AppCompatActivity {
 
         searchUsername = (Button) findViewById(R.id.searchByUsername);
         searchHashtag = (Button) findViewById(R.id.searchByHashtag);
+        trendingTopics = (Button) findViewById(R.id.searchTrending);
+
         helpSearch = (Button) findViewById(R.id.helpSearch);
 
         searchUsername.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +33,14 @@ public class SearchActivity extends AppCompatActivity {
         searchHashtag.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this, SearchHashtagActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        trendingTopics.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this, TrendingActivity.class);
                 startActivity(intent);
                 finish();
             }

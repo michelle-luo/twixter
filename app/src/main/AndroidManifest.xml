@@ -42,6 +42,8 @@
         <activity android:name=".SearchUsernameActivity" />
         <activity android:name=".HelpActivity" />
         <activity android:name=".DmActivity" />
+        <activity android:name=".TrendingActivity" />
+
         <activity
             android:name=".SearchHashtagActivity"
             android:label="@string/title_activity_search_hashtag"

@@ -24,6 +24,17 @@
         android:text="Search by Hashtag" />
 
     <Button
+        android:id="@+id/searchTrending"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:text="Trending Tweets"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/searchByHashtag"
+        android:layout_alignLeft="@+id/searchByHashtag"
+        android:layout_alignStart="@+id/searchByHashtag" />
+
+
+    <Button
         android:id="@+id/helpSearch"
         android:layout_width="55dp"
         android:layout_height="55dp"
