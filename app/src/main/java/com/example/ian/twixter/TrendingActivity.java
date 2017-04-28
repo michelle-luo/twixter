@@ -94,10 +94,10 @@ public class TrendingActivity extends AppCompatActivity{
                 AlertDialog.Builder helpDialog = new AlertDialog.Builder(TrendingActivity.this);
 
                 helpDialog.setTitle("Help");
-                /*helpDialog.setMessage("To see what people are saying about a specific hashtag, " +
-                        "type the hashtag you want to search in the first box. In the second " +
-                        "box, input the number of tweets you want to see. Then hit send, and " +
-                        "check out your feed.");*/
+                helpDialog.setMessage("To see the most popular tweets on Twitter, " +
+                        "simply enter the amount of trending tweets you would like to receive " +
+                        "in the text box. Then hit send, and " +
+                        "check out your feed.");
                 helpDialog.setCancelable(true);
 
                 helpDialog.setPositiveButton(
