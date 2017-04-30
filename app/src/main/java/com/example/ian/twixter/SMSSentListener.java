@@ -11,7 +11,9 @@ class SMSSentListener extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         int resultCode = this.getResultCode();
         boolean sent = (resultCode == Activity.RESULT_OK);
-        Toast.makeText(context, "Request sent!", Toast.LENGTH_LONG).show();
+        if (sent) {
+            Toast.makeText(context, "Request sent!", Toast.LENGTH_LONG).show();
+        }
         context.unregisterReceiver(this);
     }
 }
