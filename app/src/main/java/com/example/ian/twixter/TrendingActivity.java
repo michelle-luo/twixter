@@ -1,8 +1,10 @@
 package com.example.ian.twixter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -23,17 +25,38 @@ public class TrendingActivity extends AppCompatActivity{
     Button searchButton, cancelButton, helpSearch;
     EditText numTexts;
     Intent intent;
+    double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trending_topics);
 
+        LocationManager locationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+
         searchButton = (Button) findViewById(R.id.searchTrendingButton);
         cancelButton = (Button) findViewById(R.id.cancelTrendingButton);
         helpSearch = (Button) findViewById(R.id.helpTrendingSearch);
         numTexts = (EditText) findViewById(R.id.numTextBox);
         numTexts.setHint("How many tweets?");
+
+        GPSTracker gps;
+        gps = new GPSTracker(TrendingActivity.this);
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Asks user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+
 
         intent = getIntent();
 
@@ -61,7 +84,7 @@ public class TrendingActivity extends AppCompatActivity{
                 }
 
 
-                String msg = "tr " + numberOfTexts;
+                String msg = "tr " + numberOfTexts + latitude + "," + longitude;
 
                 /* send message */
                 SendText.sendText(getBaseContext(), "+17312567648", msg);
