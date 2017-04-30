@@ -45,12 +45,12 @@ public class TrendingActivity extends AppCompatActivity{
         gps = new GPSTracker(TrendingActivity.this);
 
         // check if GPS enabled
-        if(gps.canGetLocation()){
+        if (gps.canGetLocation()) {
 
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
 
-        }else{
+        } else {
             // can't get location
             // GPS or Network is not enabled
             // Asks user to enable GPS/network in settings
@@ -142,7 +142,5 @@ public class TrendingActivity extends AppCompatActivity{
             }
         });
     }
-
-
 }
 

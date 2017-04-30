@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -90,7 +89,6 @@ public class FeedActivity extends AppCompatActivity {
             return;
 
         do {
-            // Log.d("REFRESH SMS", smsInboxCursor.getString(indexAddress));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 if (Objects.equals(smsInboxCursor.getString(indexAddress), "7312567648")) {
                     Newsitem newsData = new Newsitem();

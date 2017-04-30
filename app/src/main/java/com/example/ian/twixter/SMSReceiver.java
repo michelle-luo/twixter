@@ -24,7 +24,7 @@ public class SMSReceiver extends BroadcastReceiver {
                         String senderNo = currentSMS.getDisplayOriginatingAddress();
                         String message = currentSMS.getDisplayMessageBody();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                            if (Objects.equals(senderNo, Integer.toString(R.string.twilio_num))) {
+                            if (Objects.equals(senderNo, "7312567648")) {
                                 message = message.replace(Integer.toString(R.string.twilio_message), "");
                             }
                         }
