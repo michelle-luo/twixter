@@ -2,7 +2,9 @@ package com.example.ian.twixter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +17,17 @@ public class MainActivity extends AppCompatActivity {
     Button feedButton, postButton, searchButton, dmButton, helpButton;
     int numSms;
 
-    protected void updateHeader(int smsCount) {
-        headerText = "You have used " + Integer.toString(smsCount) + " texts today.";
+    protected void updateHeader() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        /* get num texts already there */
+        String textsSentKey = "com.example.ian.twixter.texts";
+        int textsSent = prefs.getInt(textsSentKey, -1);
+        if (textsSent == -1) {
+            headerText = "You have used 0 texts today.";
+        }
+        else {
+            headerText = "You have used " + textsSent + " texts today.";
+        }
         header.setText(headerText);
     }
 
@@ -25,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        numSms = 0;
-
         header = (TextView) findViewById(R.id.msgToday);
         feedButton = (Button) findViewById(R.id.feedButton);
         postButton = (Button) findViewById(R.id.postButton);
@@ -34,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
         dmButton = (Button) findViewById(R.id.dmButton);
         helpButton = (Button) findViewById(R.id.helpButton);
 
-        updateHeader(numSms);
+        updateHeader();
 
         postButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PostActivity.class);
-                int requestCode = 1;
-                startActivityForResult(intent, requestCode);
+                startActivity(intent);
+                updateHeader();
             }
         });
 
@@ -54,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                int requestCode = 1;
-                startActivityForResult(intent, requestCode);
+                startActivity(intent);
             }
         });
 
@@ -81,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 Log.d("onactivityresult", "updating header");
                 numSms += data.getIntExtra("numSms", 0);
-                updateHeader(numSms);
+                updateHeader();
             }
             if (resultCode == Activity.RESULT_CANCELED && data == null) {
                 Log.d("RESULT==CANCELED", "onActivityResult");

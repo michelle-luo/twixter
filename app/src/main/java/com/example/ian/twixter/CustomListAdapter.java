@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 
 public class CustomListAdapter extends ArrayAdapter<Newsitem>{
     private ArrayList<Newsitem> listData;
-    Context mContext;
+    private Context mContext;
 
     private static class ViewHolder {
         TextView usernameView;

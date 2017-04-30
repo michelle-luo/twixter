@@ -1,6 +1,5 @@
 package com.example.ian.twixter;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +11,21 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class PostActivity extends AppCompatActivity {
     Button sendButton, cancelButton, helpPost;
+    ListView smsListView;
     TextView charCounter;
     Intent intent;
     EditText tweetText;
+    CustomListAdapter adapter;
+    ArrayList<Newsitem> arr;
+    Newsitem post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,10 @@ public class PostActivity extends AppCompatActivity {
         helpPost = (Button) findViewById(R.id.helpPost);
         charCounter = (TextView) findViewById(R.id.charCount);
         tweetText = (EditText) findViewById(R.id.editPost);
+        post = new Newsitem();
+
+        smsListView = (ListView) findViewById(R.id.SMSList);
+        arr = new ArrayList<>(1);
 
         intent = getIntent();
 
@@ -73,8 +83,13 @@ public class PostActivity extends AppCompatActivity {
 
                 /* send message */
                 SendText.sendText(getBaseContext(), "40404", message);
-                intent.putExtra("numSms", 1);
-                setResult(Activity.RESULT_OK, intent);
+
+                /* store your post in feed */
+                post.setUsername("Your tweet");
+                post.setFeed(message);
+                arr.add(0, post);
+
+                adapter = new CustomListAdapter(arr, getBaseContext());
 
                 Runnable r = new Runnable() {
                     @Override
@@ -84,14 +99,12 @@ public class PostActivity extends AppCompatActivity {
                 };
                 Handler h = new Handler();
                 h.postDelayed(r, 1000);
-
             }
         });
 
         helpPost.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder helpDialog = new AlertDialog.Builder(PostActivity.this);
-
                 helpDialog.setTitle("Help");
                 helpDialog.setMessage("Send a tweet and share your thoughts with the world! " +
                         "Type the message that you want to share in the box, then hit send.");
@@ -114,7 +127,6 @@ public class PostActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
-
                 AlertDialog alert = helpDialog.create();
                 alert.show();
             }

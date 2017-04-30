@@ -20,7 +20,7 @@ public class FeedActivity extends AppCompatActivity {
     private static FeedActivity inst;
     ListView smsListView;
     Button helpFeed;
-    ArrayList<Newsitem> smsMessagesList = new ArrayList<>();
+    ArrayList<Newsitem> smsMessagesList;
     private static CustomListAdapter myAdapter;
 
     public static FeedActivity instance() {
@@ -38,6 +38,7 @@ public class FeedActivity extends AppCompatActivity {
 
         smsListView = (ListView) findViewById(R.id.SMSList);
         helpFeed = (Button) findViewById(R.id.helpFeed);
+        smsMessagesList = new ArrayList<>();
 
         myAdapter = new CustomListAdapter(smsMessagesList, getApplicationContext());
         smsListView.setAdapter(myAdapter);
@@ -105,9 +106,8 @@ public class FeedActivity extends AppCompatActivity {
 
     public void updateList(final String smsMessage) {
         Newsitem newTweet = new Newsitem();
-        String smsMessageCopy = smsMessage;
 
-        String[] body = smsMessageCopy.split(" ", 2);
+        String[] body = smsMessage.split(" ", 2);
         String username = body[0];
         String tweet = body[1];
 

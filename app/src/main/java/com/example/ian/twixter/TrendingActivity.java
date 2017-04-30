@@ -3,7 +3,6 @@ package com.example.ian.twixter;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -30,9 +29,6 @@ public class TrendingActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trending_topics);
-
-        LocationManager locationManager = (LocationManager)
-                getSystemService(LOCATION_SERVICE);
 
         searchButton = (Button) findViewById(R.id.searchTrendingButton);
         cancelButton = (Button) findViewById(R.id.cancelTrendingButton);
