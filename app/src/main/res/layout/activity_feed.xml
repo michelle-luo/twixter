@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_margin="5dp"
-        android:layout_above="@+id/helpFeed"/>
+        android:layout_above="@+id/helpFeed" />
 
     <Button
         android:id="@+id/helpFeed"

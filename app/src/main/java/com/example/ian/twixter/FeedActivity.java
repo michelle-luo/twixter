@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,12 +19,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class FeedActivity extends AppCompatActivity {
-
     private static FeedActivity inst;
-    ArrayList<String> smsMessagesList = new ArrayList<String>();
     ListView smsListView;
     Button helpFeed;
-    ArrayAdapter<String> arrayAdapter;
+    ArrayList<Newsitem> smsMessagesList = new ArrayList<>();
+    private static CustomListAdapter myAdapter;
 
     public static FeedActivity instance() {
         return inst;
@@ -37,10 +37,12 @@ public class FeedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+
         smsListView = (ListView) findViewById(R.id.SMSList);
         helpFeed = (Button) findViewById(R.id.helpFeed);
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, smsMessagesList);
-        smsListView.setAdapter(arrayAdapter);
+
+        myAdapter = new CustomListAdapter(smsMessagesList, getApplicationContext());
+        smsListView.setAdapter(myAdapter);
 
         helpFeed.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,6 +81,7 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     public void refreshSmsInbox() {
+
         ContentResolver contentResolver = getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null, null, null, null);
         assert smsInboxCursor != null;
@@ -87,25 +90,40 @@ public class FeedActivity extends AppCompatActivity {
         if (indexBody < 0 || !smsInboxCursor.moveToFirst())
             return;
 
-        arrayAdapter.clear();
-
         do {
             // Log.d("REFRESH SMS", smsInboxCursor.getString(indexAddress));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Log.e("my Tag", "address is " + smsInboxCursor.getString(indexAddress));
                 if (Objects.equals(smsInboxCursor.getString(indexAddress), "7312567648")) {
+                    Newsitem newsData = new Newsitem();
+
                     String sms = smsInboxCursor.getString(indexBody);
                     String[] body = sms.split(" ", 2);
                     String username = body[0];
+                    Log.e("my tag", "username is "+ username);
+                    newsData.setUsername(username);
                     String tweet = body[1];
-                    String str = username + ":\n" + tweet + "\n";
-                    arrayAdapter.add(str);
+                    Log.e("mt Tag", "tweet is " + tweet);
+                    newsData.setFeed(tweet);
+                    myAdapter.add(newsData);
                 }
             }
         } while (smsInboxCursor.moveToNext());
     }
 
     public void updateList(final String smsMessage) {
-        arrayAdapter.insert(smsMessage, 0);
-        arrayAdapter.notifyDataSetChanged();
+        Newsitem newTweet = new Newsitem();
+        String smsMessageCopy = smsMessage;
+
+        String[] body = smsMessageCopy.split(" ", 2);
+        String username = body[0];
+        String tweet = body[1];
+
+        newTweet.setUsername(username);
+        newTweet.setFeed(tweet);
+
+        myAdapter.insert(newTweet, 0);
+        myAdapter.notifyDataSetChanged();
     }
+
 }
