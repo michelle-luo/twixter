@@ -3,13 +3,10 @@ package com.example.ian.twixter;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +21,6 @@ import java.util.Objects;
 
 public class TrendingActivity extends AppCompatActivity{
     Button searchButton, cancelButton, helpSearch;
-    //SearchView search;
     EditText numTexts;
     Intent intent;
 
@@ -65,7 +61,7 @@ public class TrendingActivity extends AppCompatActivity{
                 }
 
 
-                String msg = "tt " + numberOfTexts;
+                String msg = "tr " + numberOfTexts;
 
                 /* send message */
                 SendText.sendText(getBaseContext(), "+17312567648", msg);
