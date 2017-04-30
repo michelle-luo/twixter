@@ -1,7 +1,6 @@
 package com.example.ian.twixter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
@@ -33,7 +32,7 @@ public class TrendingActivity extends AppCompatActivity{
         setContentView(R.layout.trending_topics);
 
         LocationManager locationManager = (LocationManager)
-                getSystemService(Context.LOCATION_SERVICE);
+                getSystemService(LOCATION_SERVICE);
 
         searchButton = (Button) findViewById(R.id.searchTrendingButton);
         cancelButton = (Button) findViewById(R.id.cancelTrendingButton);
@@ -46,7 +45,6 @@ public class TrendingActivity extends AppCompatActivity{
 
         // check if GPS enabled
         if (gps.canGetLocation()) {
-
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
 
@@ -79,10 +77,10 @@ public class TrendingActivity extends AppCompatActivity{
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 if (numberOfTexts > 10) {
                     numberOfTexts = 10;
                 }
-
 
                 String msg = "tr " + numberOfTexts + " " + latitude + "," + longitude;
 

@@ -74,12 +74,10 @@ public class FeedActivity extends AppCompatActivity {
                 alert.show();
             }
         });
-
         refreshSmsInbox();
     }
 
     public void refreshSmsInbox() {
-
         ContentResolver contentResolver = getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null, null, null, null);
         assert smsInboxCursor != null;
