@@ -84,7 +84,7 @@ public class TrendingActivity extends AppCompatActivity{
                 }
 
 
-                String msg = "tr " + numberOfTexts + latitude + "," + longitude;
+                String msg = "tr " + numberOfTexts + " " + latitude + "," + longitude;
 
                 /* send message */
                 SendText.sendText(getBaseContext(), "+17312567648", msg);

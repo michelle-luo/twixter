@@ -11,7 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -93,17 +92,14 @@ public class FeedActivity extends AppCompatActivity {
         do {
             // Log.d("REFRESH SMS", smsInboxCursor.getString(indexAddress));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                Log.e("my Tag", "address is " + smsInboxCursor.getString(indexAddress));
                 if (Objects.equals(smsInboxCursor.getString(indexAddress), "7312567648")) {
                     Newsitem newsData = new Newsitem();
 
-                    String sms = smsInboxCursor.getString(indexBody);
+                    String sms = smsInboxCursor.getString(indexBody).replace("Sent from your Twilio trial account - ", "");
                     String[] body = sms.split(" ", 2);
                     String username = body[0];
-                    Log.e("my tag", "username is "+ username);
                     newsData.setUsername(username);
                     String tweet = body[1];
-                    Log.e("mt Tag", "tweet is " + tweet);
                     newsData.setFeed(tweet);
                     myAdapter.add(newsData);
                 }
