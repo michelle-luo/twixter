@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class CustomListAdapter extends ArrayAdapter<Newsitem> implements Filterable {
     private ArrayList<Newsitem> mOriginalValues;     // Original Values
     private ArrayList<Newsitem> mDisplayedValues;    // Values to be displayed
+    Context mContext;
 
     private static class ViewHolder {
         TextView usernameView;
@@ -29,6 +30,7 @@ public class CustomListAdapter extends ArrayAdapter<Newsitem> implements Filtera
         super(context, R.layout.list_row_layout, listData);
         this.mOriginalValues = listData;
         this.mDisplayedValues = listData;
+        this.mContext=context;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {

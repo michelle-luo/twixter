@@ -127,14 +127,13 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     public void updateList(final String smsMessage) {
-        Newsitem newTweet = new Newsitem("", "");
 
         String[] body = smsMessage.split(" ", 2);
         String username = body[0];
         String tweet = body[1];
-
-        newTweet.setUsername(username);
-        newTweet.setFeed(tweet);
+        Newsitem newTweet = new Newsitem(username, tweet);
+        // newTweet.setUsername(username);
+        // newTweet.setFeed(tweet);
 
         myAdapter.insert(newTweet, 0);
         myAdapter.notifyDataSetChanged();
