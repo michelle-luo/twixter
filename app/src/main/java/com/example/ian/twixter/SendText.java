@@ -24,15 +24,20 @@ abstract class SendText {
             /* update preferences */
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = prefs.edit();
+
             /* get num texts already there */
             String textsSentKey = "com.example.ian.twixter.texts";
             int textsSent = prefs.getInt(textsSentKey, -1);
             if (textsSent != -1) {
                 textsSent++;
             }
+            else {
+                textsSent = 0;
+            }
+
             /* store back in shared prefs */
             editor.putInt(textsSentKey, textsSent);
-            editor.apply();
+            editor.commit();
         }
         catch (Exception e) {
             Toast.makeText(context, "Failed to send: " + e.getMessage(),

@@ -8,6 +8,12 @@ public class Newsitem {
     private String username;
     private String feed;
 
+    public Newsitem (String username, String feed) {
+        super();
+        this.username = username;
+        this.feed = feed;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }

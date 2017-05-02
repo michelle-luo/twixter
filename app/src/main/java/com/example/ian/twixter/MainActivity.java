@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             headerText = "You have used " + textsSent + " texts today.";
         }
+        Log.d("update header", "used " + textsSent + " texts");
         header.setText(headerText);
     }
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PostActivity.class);
                 startActivity(intent);
+                Log.d("post button updating header", "fuckkk");
                 updateHeader();
             }
         });

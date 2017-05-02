@@ -37,7 +37,6 @@ public class PostActivity extends AppCompatActivity {
         helpPost = (Button) findViewById(R.id.helpPost);
         charCounter = (TextView) findViewById(R.id.charCount);
         tweetText = (EditText) findViewById(R.id.editPost);
-        post = new Newsitem();
 
         smsListView = (ListView) findViewById(R.id.SMSList);
         arr = new ArrayList<>(1);
@@ -85,8 +84,7 @@ public class PostActivity extends AppCompatActivity {
                 SendText.sendText(getBaseContext(), "40404", message);
 
                 /* store your post in feed */
-                post.setUsername("Your tweet");
-                post.setFeed(message);
+                post = new Newsitem("Your tweet", message);
                 arr.add(0, post);
 
                 adapter = new CustomListAdapter(arr, getBaseContext());

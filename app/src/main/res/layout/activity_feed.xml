@@ -17,8 +17,16 @@
         android:text="Feed"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
+    <!-- Editext for Search -->
+    <EditText android:id="@+id/inputSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feedTitle"
+        android:hint="Search feed..."
+        android:inputType="textVisiblePassword"/>
+
     <ListView android:id="@+id/SMSList"
-        android:layout_below="@id/feedTitle"
+        android:layout_below="@id/inputSearch"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_margin="5dp"
