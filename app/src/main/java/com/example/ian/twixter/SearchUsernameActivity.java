@@ -60,7 +60,7 @@ public class SearchUsernameActivity extends AppCompatActivity {
                     numTexts = 10;
                 }
                 String message = "su " + numTexts + " " + username;
-                SendText.sendText(getBaseContext(), Integer.toString(R.string.twilio_num),
+                SendText.sendText(getBaseContext(), "+17312567648",
                         message);
 
                 intent = new Intent();
